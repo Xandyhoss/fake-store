@@ -11,8 +11,8 @@ const Navbar: React.FC = () => {
       <div className="flex absolute right-5 items-center">
         <p className="font-bold text-black">Cart</p>
         <div className="relative flex">
-          <ShoppingBag size={30} className="text-red-500 " />
-          <div className="bg-red-500 rounded-full h-4 w-4 text-[0.8rem] absolute flex justify-center items-center p-[1px] right-[-5px] bottom-[-5px]">
+          <ShoppingBag size={30} className="text-red-500" />
+          <div className="bg-red-500 rounded-full h-4 w-4 font-bold text-[0.8rem] absolute flex justify-center items-center p-[1px] right-[-5px] bottom-[-5px]">
             {cart.length}
           </div>
         </div>

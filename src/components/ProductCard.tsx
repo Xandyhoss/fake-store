@@ -8,8 +8,8 @@ interface PropsType {
 const ProductCard: React.FC<PropsType> = ({ product }) => {
   const { addProductToCart } = useCart();
   return (
-    <div className="flex flex-col items-center p-3 bg-white w-full rounded">
-      <div className="bg-white h-[200px] w-full rounded overflow-hidden flex justify-center">
+    <div className="flex flex-col max-h-[450px] items-center justify-between p-3 bg-white w-full rounded">
+      <div className="bg-white w-full rounded overflow-hidden flex justify-center">
         <img src={product.image} className="w-full h-full object-contain" />
       </div>
       <div className="flex flex-col justify-center items-center h-[200px]">
@@ -30,7 +30,7 @@ const ProductCard: React.FC<PropsType> = ({ product }) => {
         </div>
       </div>
       <button
-        className="bg-blue-700 rounded-lg p-2 hover:bg-blue-900 transition-all hover:scale-105"
+        className="bg-blue-700 rounded-lg p-2 hover:bg-blue-900 transition-all hover:scale-105 mt-2"
         onClick={() => addProductToCart(product)}
       >
         Add to Cart
