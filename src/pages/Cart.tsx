@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CartItem from "../components/CartItem";
 import Navbar from "../components/Navbar";
 import { useCart } from "../context/CartProvider/useCart";
@@ -7,11 +7,11 @@ const Cart: React.FC = () => {
   const cart = useCart();
   const [sumCart, setSumCart] = useState(0);
 
-  const updateTotalPrice = () => {
+  const updateTotalPrice = useCallback(() => {
     setSumCart(
       cart.cart.map((item) => item.price * item.amount).reduce((a, b) => a + b)
     );
-  };
+  }, [cart.cart]);
 
   useEffect(() => {
     if (cart.cart.length > 0) {
@@ -21,7 +21,7 @@ const Cart: React.FC = () => {
           .reduce((a, b) => a + b)
       );
     }
-  }, [cart]);
+  });
 
   return (
     <div className="flex flex-col w-full min-h-screen items-center gap-y-2">

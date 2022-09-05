@@ -18,9 +18,11 @@ const CartItem: React.FC<Props> = ({ product, updateTotalPrice }) => {
         updateTotalPrice();
         break;
       case "decrease":
-        cart.modifyAmount("decrease", product);
-        setItemAmount(itemAmount - 1);
-        updateTotalPrice();
+        if (product.amount > 1) {
+          cart.modifyAmount("decrease", product);
+          setItemAmount(itemAmount - 1);
+          updateTotalPrice();
+        }
         break;
     }
   };

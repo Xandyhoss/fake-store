@@ -20,7 +20,9 @@ const Main: React.FC = () => {
   };
 
   useEffect(() => {
-    getData();
+    if (cart.products?.length === 0) {
+      getData();
+    }
   }, []);
   return (
     <div className="flex flex-col w-full min-h-screen items-center gap-y-2">
