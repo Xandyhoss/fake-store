@@ -20,7 +20,7 @@ export interface CartProduct extends Product {
 export interface ICartContext {
   products: Product[] | null;
   cart: CartProduct[];
-  addProductToCart: (product: CartProduct) => void;
+  addProductToCart: (product: Product) => void;
   removeProductFromCart: (product: CartProduct) => void;
   fetchProducts: () => Promise<void>;
   modifyAmount: (type: "increase" | "decrease", product: CartProduct) => void;

@@ -8,7 +8,7 @@ export const CartProvider = ({ children }: ICartProvider) => {
   const [cart, setCart] = useState<CartProduct[]>([]);
   const [products, setProducts] = useState<Product[] | null>([]);
 
-  function addProductToCart(product: CartProduct) {
+  function addProductToCart(product: Product) {
     const checkExistingProduct = cart?.find(
       (element) => element.id === product.id
     );
