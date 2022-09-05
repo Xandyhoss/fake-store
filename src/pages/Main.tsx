@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useCart } from "../context/CartProvider/useCart";
-import Navbar from "./Navbar";
-import ProductCard from "./ProductCard";
+import Navbar from "../components/Navbar";
+import ProductCard from "../components/ProductCard";
 
 const Main: React.FC = () => {
   const cart = useCart();

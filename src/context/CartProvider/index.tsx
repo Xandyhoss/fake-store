@@ -9,7 +9,17 @@ export const CartProvider = ({ children }: ICartProvider) => {
   const [products, setProducts] = useState<Product[] | null>([]);
 
   function addProductToCart(product: Product) {
-    setCart((oldState) => [...oldState, product]);
+    const checkExistingProduct = cart?.find(
+      (element) => element.id === product.id
+    );
+
+    if (!checkExistingProduct) {
+      setCart((oldState) => [...oldState, product]);
+      return;
+    }
+
+    console.log('Already added product');
+    return;
   }
 
   function removeProductFromCart(product: Product) {
