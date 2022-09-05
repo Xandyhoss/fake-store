@@ -13,12 +13,17 @@ export interface Product {
   };
 }
 
+export interface CartProduct extends Product {
+  amount: number;
+}
+
 export interface ICartContext {
   products: Product[] | null;
-  cart: Product[];
-  addProductToCart: (product: Product) => void;
-  removeProductFromCart: (product: Product) => void;
+  cart: CartProduct[];
+  addProductToCart: (product: CartProduct) => void;
+  removeProductFromCart: (product: CartProduct) => void;
   fetchProducts: () => Promise<void>;
+  modifyAmount: (type: "increase" | "decrease", product: CartProduct) => void;
 }
 
 export interface ICartProvider {

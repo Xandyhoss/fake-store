@@ -1,11 +1,30 @@
 import { Minus, Plus, Trash } from "phosphor-react";
-import { Product } from "../context/CartProvider/types";
+import { useEffect, useState } from "react";
+import { CartProduct } from "../context/CartProvider/types";
 import { useCart } from "../context/CartProvider/useCart";
 interface Props {
-  product: Product;
+  product: CartProduct;
+  updateTotalPrice: () => void;
 }
-const CartItem: React.FC<Props> = ({ product }) => {
+const CartItem: React.FC<Props> = ({ product, updateTotalPrice }) => {
+  const [itemAmount, setItemAmount] = useState(product.amount);
   const cart = useCart();
+
+  const modifyAmount = (type: "increase" | "decrease") => {
+    switch (type) {
+      case "increase":
+        cart.modifyAmount("increase", product);
+        setItemAmount(itemAmount + 1);
+        updateTotalPrice();
+        break;
+      case "decrease":
+        cart.modifyAmount("decrease", product);
+        setItemAmount(itemAmount - 1);
+        updateTotalPrice();
+        break;
+    }
+  };
+
   return (
     <div className="h-32 w-full bg-white rounded-lg flex items-center p-4 justify-between">
       <div className="flex items-center gap-x-10">
@@ -26,9 +45,15 @@ const CartItem: React.FC<Props> = ({ product }) => {
           2
         )}`}</p>
         <div className="flex items-center gap-x-1">
-          <Minus className="text-red-600" />
-          <p className="text-black">1</p>
-          <Plus className="text-green-600" />
+          <Minus
+            className="text-red-600"
+            onClick={() => modifyAmount("decrease")}
+          />
+          <p className="text-black">{itemAmount}</p>
+          <Plus
+            className="text-green-600"
+            onClick={() => modifyAmount("increase")}
+          />
         </div>
         <div className="flex items-center gap-x-1">
           <Trash

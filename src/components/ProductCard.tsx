@@ -1,8 +1,8 @@
-import { Product } from "../context/CartProvider/types";
+import { CartProduct, Product } from "../context/CartProvider/types";
 import { useCart } from "../context/CartProvider/useCart";
 
 interface PropsType {
-  product: Product;
+  product: CartProduct;
 }
 
 const ProductCard: React.FC<PropsType> = ({ product }) => {

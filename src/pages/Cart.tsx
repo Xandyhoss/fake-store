@@ -1,18 +1,27 @@
 import { useEffect, useState } from "react";
 import CartItem from "../components/CartItem";
 import Navbar from "../components/Navbar";
-import { Product } from "../context/CartProvider/types";
 import { useCart } from "../context/CartProvider/useCart";
 
 const Cart: React.FC = () => {
   const cart = useCart();
   const [sumCart, setSumCart] = useState(0);
 
+  const updateTotalPrice = () => {
+    setSumCart(
+      cart.cart.map((item) => item.price * item.amount).reduce((a, b) => a + b)
+    );
+  };
+
   useEffect(() => {
     if (cart.cart.length > 0) {
-      setSumCart(cart.cart.map((item) => item.price).reduce((a, b) => a + b));
+      setSumCart(
+        cart.cart
+          .map((item) => item.price * item.amount)
+          .reduce((a, b) => a + b)
+      );
     }
-  }, [cart.cart]);
+  }, [cart]);
 
   return (
     <div className="flex flex-col w-full min-h-screen items-center gap-y-2">
@@ -21,7 +30,13 @@ const Cart: React.FC = () => {
         <div className="flex w-full max-w-[1100px] pt-20 pb-8 gap-x-2">
           <div className="w-[80%] flex flex-col gap-y-2">
             {cart.cart.map((item) => {
-              return <CartItem product={item} />;
+              return (
+                <CartItem
+                  product={item}
+                  key={item.id}
+                  updateTotalPrice={updateTotalPrice}
+                />
+              );
             })}
           </div>
           <div className="w-[20%] h-min rounded-lg bg-white flex flex-col items-center p-4">
